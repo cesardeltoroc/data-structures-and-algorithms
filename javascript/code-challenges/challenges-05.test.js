@@ -14,7 +14,9 @@ Note the space in between first and last names.
 You can assume that neither firstName nor lastName will be blank
 ------------------------------------------------------------------------------------------------ */
 const toLastNames = people => {
-
+  return people.map((value) => {
+    return (`${value.firstName} ${value.lastName}`);
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -60,11 +62,11 @@ Note: You may not use the array's built-in length property.
 ------------------------------------------------------------------------------------------------ */
 
 const countNumberOfElements = (arr) => {
-  let count = arr.reduce((acc, cur) => {
-    acc[cur] += 1;
-    return acc;
+  let arrTotal = arr.reduce((count) => {
+    count = count + 1;
+    return count;
   }, 0);
-  return count;
+  return arrTotal;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -124,9 +126,11 @@ let starWarsData = [{
 }];
 
 const returnNames = (arr) => {
-  var names = arr.reduce((acc, cur) => {
-    return acc[cur.name];
-  }, {});
+  let names = arr.reduce((accumulator, value) => {
+    accumulator.push(value.name);
+    return accumulator;
+  }, []);
+
   return names;
 };
 
@@ -139,8 +143,13 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 ------------------------------------------------------------------------------------------------ */
 
 const reversedString = (str) => {
-  // Solution code here...
-};
+
+  let arr = str.split('');
+  let reversed = arr.reduce((newString, currentLetter)=>{
+    return currentLetter + newString;
+  }, '');
+
+  return reversed;};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
