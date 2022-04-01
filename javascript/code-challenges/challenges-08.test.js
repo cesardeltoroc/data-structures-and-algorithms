@@ -63,7 +63,7 @@ Write a function named containsW that takes in a string. This function should us
 ------------------------------------------------------------------------------------------------ */
 
 const containsW = (str) => {
-  let regex = /[w]+/gm
+  let regex = /[w]+/gm;
   return regex.test(str);
 };
 
