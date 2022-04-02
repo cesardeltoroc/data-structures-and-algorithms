@@ -18,9 +18,9 @@ Becomes:
 ]
 ------------------------------------------------------------------------------------------------ */
 
-function transformToLis(obj){
+function transformToLis(obj) {
   const newArr = [];
-  if(obj.name){
+  if (obj.name) {
     newArr.push(
       `<li>name: ${obj.name}</li>`,
       `<li>age: ${obj.age}</li>`
@@ -40,7 +40,15 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 ------------------------------------------------------------------------------------------------ */
 
 const count = (target, input) => {
-  
+  let counter = 0;
+  for (let i = 0; i < input.length; i++) {
+    for (let j = 0; j < input[i].length; j++) {
+      if (input[i][j] === target) {
+        counter = counter + 1;
+      }
+    }
+  }
+  return counter;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -54,7 +62,12 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 ------------------------------------------------------------------------------------------------ */
 
 const totalSum = (input) => {
-
+  let total = 0;
+  for (let i = 0; i < input.length; i++) {
+    let sum = input[i].reduce((sum, a) => sum + a, 0);
+    total += sum;
+  }
+  return total;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -70,7 +83,8 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 ------------------------------------------------------------------------------------------------ */
 
 const divisibleByFiveTwoToThePower = (input) => {
-  // Solution code here...
+  let newArr = input.map(arr => arr.filter(element => typeof(element) === 'number' && element % 5 === 0));
+  return newArr.map(arr => arr.map(element => 2 ** element));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -136,17 +150,32 @@ let starWarsData = [{
 }];
 
 let findMaleAndFemale = (data) => {
-  // Solution code here...
+  let nameArr = [];
+  for(let i = 0; i < data.length; i++){
+    if((data[i].gender === 'female') || (data[i].gender === 'male')){
+      let names = [data[i].name];
+      nameArr.push(names);
+    }
+  }
+  return nameArr.join(' and ');
 };
 
-/* ------------------------------------------------------------------------------------------------
+/* --------
+----------------------------------------------------------------------------------------
 CHALLENGE 6
 
 Write a function named findShortest that, given the Star Wars data from Challenge 6, uses any combination of filter, map and reduce to return the name of the character who is the shortest in height.
 ------------------------------------------------------------------------------------------------ */
 
 let findShortest = (data) => {
-  // Solution code here...
+  let answer =[];
+  data.map(obj => {
+    if(obj.height > '90'){
+      let name =  obj.name;
+      answer.push(name);
+    }
+  });
+  return answer.join('and');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -162,8 +191,8 @@ Run your tests from the console: jest challenges-10.test.js
 
 describe('Testing challenge 1', () => {
   test('It should return a list of key value pairs inside of li tags', () => {
-    expect(transformToLis({name: 'bob', age: 32})[0]).toStrictEqual(`<li>name: bob</li>`);
-    expect(transformToLis({name: 'bob', age: 32})[1]).toStrictEqual(`<li>age: 32</li>`);
+    expect(transformToLis({ name: 'bob', age: 32 })[0]).toStrictEqual(`<li>name: bob</li>`);
+    expect(transformToLis({ name: 'bob', age: 32 })[1]).toStrictEqual(`<li>age: 32</li>`);
     expect(transformToLis({})).toStrictEqual([]);
   });
 });
